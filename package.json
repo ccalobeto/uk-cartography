@@ -7,7 +7,12 @@
 		"build": "vite build",
 		"preview": "vite preview",
 		"lint": "prettier --check . && eslint .",
-		"format": "prettier --write ."
+		"format": "prettier --write .",
+		"make-lookup": "node ./scripts/make-lookup.js",
+		"merge-lookup": "node ./scripts/merge-lookup.js",
+		"make-topo-layers": "node ./scripts/make-topo-layers.js",
+		"merge-topo-layers": "node ./scripts/merge-topo-layers.js",
+		"make-topo": "node ./scripts/make-lookup.js && node ./scripts/merge-lookup.js && node ./scripts/make-topo-layers.js && node ./scripts/merge-topo-layers.js"
 	},
 	"devDependencies": {
 		"@sveltejs/adapter-auto": "^3.0.0",
@@ -22,7 +27,13 @@
 		"prettier": "^3.1.1",
 		"prettier-plugin-svelte": "^3.1.2",
 		"svelte": "^4.2.7",
-		"vite": "^5.0.3"
+		"vite": "^5.0.3",
+		"@onsvisual/svelte-maps": "latest",
+		"@turf/bbox": "latest",
+		"@turf/meta": "^6.5.0",
+		"d3-dsv": "^3.0.1",
+		"mapshaper": "^0.6.29",
+		"wkt": "^0.1.1"
 	},
 	"type": "module"
 }
