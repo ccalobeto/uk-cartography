@@ -1,38 +1,47 @@
-# create-svelte
+# UK TopoJSON, 2014 - 2023
 
-Everything you need to build a Svelte project, powered by [`create-svelte`](https://github.com/sveltejs/kit/tree/main/packages/create-svelte).
+This repo contains scripts and input files to generate a TopoJSON file covering the following geography layers from 2014 up to the present. (You can preview and download individual geographies with [this tool](https://onsvisual.github.io/uk-topojson)).
 
-## Creating a project
+- **uk** United Kingdom (K02)
+- **ctry** Countries (E92, N92, S92, W92)
+- **rgn** Regions (E12, N92, S92, W92)
+- **cty** Counties (E10)
+- **mcty** Metropolitan counties (E11)
+- **cauth** Combined authorities (E47)
+- **utla** Upper-tier/unitary authorities (E06, E08, E09, E10, N09, S12, W06)
+- **ltla** Lower-tier/unitary authorities (E06, E08, E07, E09, N09, S12, W06)
 
-If you're seeing this, you've probably already done this step. Congrats!
+The output file contains layers for each of the above geographies. Each area has **areacd** (GSS code) and **areanm** (official name) attributes, and may include a **start** and/or **end** attribute for filtering by year (only for new or terminated areas).
+
+## Running the scripts
+
+First, you will need to install the NodeJS dependencies. Assuming you have NodeJS installed, simply run:
 
 ```bash
-# create a new project in the current directory
-npm create svelte@latest
-
-# create a new project in my-app
-npm create svelte@latest my-app
+npm install
 ```
 
-## Developing
+Next, you will need to run the scripts. This can be done with a single command:
 
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
+```bash
+npm run make-topo
+```
+
+You can preview the output locally by running the included Svelte app:
 
 ```bash
 npm run dev
-
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
 ```
 
-## Building
+## Editing/updating the config
 
-To create a production version of your app:
+To update geographies for year-on-year mergers of local authorities or terminations of counties, you should only need to edit the **/input/changes.csv** file.
 
-```bash
-npm run build
-```
+If you want to make more complex changes (eg. mergers or terminations of other geographies, or additons of new geography types), you will likely also need to edit **/input/ltla14_lookup.csv**, **/scripts/make-lookup.js**, and possibly other files.
 
-You can preview the production build with `npm run preview`.
+## Other notes
 
-> To deploy your app, you may need to install an [adapter](https://kit.svelte.dev/docs/adapters) for your target environment.
+- The base geometries used are [2016 super generalised boundaries](https://geoportal.statistics.gov.uk/search?collection=Dataset&sort=name&tags=all(BDY_LAD)%2C2016) for lower-tier/unitary local authorities.
+- There were no changes in UK local authorities from 2014 to 2016, so it is assumed that the boundaries are valid from 2014 onwards.
+- In 2018 and 2019 minor boundary changes were made to four local authority areas in Scotland. The updates to their GSS codes are included, but the boundaries provided here do not change (the changes would not be discernable at a super-generalised level in any case).
+- In 2018, _Shepway_ was renamed _Folkestone and Hythe_ without a change to its GSS code. Only the newer name is used here.
