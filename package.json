@@ -30,9 +30,9 @@
 		"vite": "^5.0.3",
 		"@onsvisual/svelte-maps": "latest",
 		"@turf/bbox": "latest",
-		"@turf/meta": "^6.5.0",
+		"@turf/meta": "^7.1.0",
 		"d3-dsv": "^3.0.1",
-		"mapshaper": "^0.6.29",
+		"mapshaper": "^0.6.99",
 		"wkt": "^0.1.1"
 	},
 	"type": "module"
