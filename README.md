@@ -45,3 +45,25 @@ If you want to make more complex changes (eg. mergers or terminations of other g
 - There were no changes in UK local authorities from 2014 to 2016, so it is assumed that the boundaries are valid from 2014 onwards.
 - In 2018 and 2019 minor boundary changes were made to four local authority areas in Scotland. The updates to their GSS codes are included, but the boundaries provided here do not change (the changes would not be discernable at a super-generalised level in any case).
 - In 2018, _Shepway_ was renamed _Folkestone and Hythe_ without a change to its GSS code. Only the newer name is used here.
+
+## Notes
+This repository was renamed. Follow these steps to do it right.
+
+Rename the remote repo in github/settings. In this case change `peru-atlas` to `latam-cartography`.
+
+Sincronize the local folder and the remote repo.
+```bash
+git remote set-url origin https://github.com/ccalobeto/latam-cartography.git
+```
+
+Check if it is sincronized. it should point to the new repository.
+```bash
+git remote -v
+```
+
+Rename the local folder
+```bash
+mv peru-atlas/ latam-cartography/
+```
+
+Deploy again

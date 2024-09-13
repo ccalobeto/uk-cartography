@@ -30,6 +30,6 @@ mapshaper.applyCommands(`-i ${files.map(f => `${dir}${f}`).join(" ")} combine-fi
     topo.objects = objects;
     const str = JSON.stringify(topo);
     fs.writeFileSync("./output/topo.json", str);
-    // fs.writeFileSync("./public/data/topo.json", str);
+    fs.writeFileSync("./static/data/topo.json", str);
     console.log("Generated final TopoJSON file ./output/topo.json");
 });
