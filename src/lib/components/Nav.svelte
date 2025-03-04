@@ -1,6 +1,20 @@
 <script>
-	import { geoTypes, countries } from '$lib/config.js';
+	import { onMount } from 'svelte';
+	import { feature } from 'topojson-client';
+	import { topology } from 'topojson-server';
+	import { coordEach } from '@turf/meta';
+	import bbox from '@turf/bbox';
+	import { csvFormat } from 'd3-dsv';
+	import { stringify } from 'wkt';
+
+	import Mapper from '$lib/components/Mapper.svelte';
+
+	import { geoTypes, countries, path } from '$lib/config.js';
 	import years from '$lib/years.js';
+
+	let geojson = {};
+	let bounds;
+	let lookup;
 
 	let geoType = geoTypes[0];
 	let year = years[years.length - 1];
@@ -10,6 +24,9 @@
 		const key = geoType.key;
 		const geo = {};
 		geo[key] = filteredGeo;
+
+		console.log(`Nav: mode => ${mode}...`);
+		console.log(`Nav: geo => ${geo}`);
 
 		let output, filename;
 
@@ -48,6 +65,39 @@
 		a.click();
 		document.body.removeChild(a);
 	}
+
+	function filterGeo(geo, year, ctrys) {
+		let filtered = JSON.parse(JSON.stringify(geo));
+		let codes = ['K', ...ctrys.map((c) => c.key)];
+		filtered.features = filtered.features
+			.filter((f) => {
+				return (
+					codes.includes(f.properties.areacd[0]) &&
+					!(f.properties.end && f.properties.end < year) &&
+					!(f.properties.start && f.properties.start > year)
+				);
+			})
+			.map((f) => {
+				f.properties = f.properties = { areacd: f.properties.areacd, areanm: f.properties.areanm };
+				return f;
+			});
+		return filtered;
+	}
+
+	async function init() {
+		const topojson = await (await fetch(path)).json();
+
+		let lkp = {};
+		geoTypes.forEach((type) => {
+			geojson[type.key] = feature(topojson, topojson.objects[type.key]);
+			geojson[type.key].features.forEach((f) => (lkp[f.properties.areacd] = f.properties));
+		});
+		bounds = bbox(geojson['uk']);
+		lookup = lkp;
+	}
+	onMount(init);
+
+	$: filteredGeo = bounds ? filterGeo(geojson[geoType.key], year, ctrys) : null;
 </script>
 
 <nav>
@@ -86,6 +136,8 @@
 		<button on:click={() => download('csv')}> Download CSV/WKT </button>
 	</div>
 </nav>
+
+<Mapper {bounds} {lookup} {filteredGeo} />
 
 <style>
 	nav > div {
