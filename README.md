@@ -47,6 +47,7 @@ If you want to make more complex changes (eg. mergers or terminations of other g
 - In 2018, _Shepway_ was renamed _Folkestone and Hythe_ without a change to its GSS code. Only the newer name is used here.
 
 ## Notes
+(Remove the above comment when is necessary)
 This repository was renamed. Follow these steps to do it right.
 
 Rename the remote repo in github/settings. In this case change `peru-atlas` to `latam-cartography`.
