@@ -15,4 +15,4 @@ export const countries = [
   {key: "W", label: "Wales"}
 ];
 export const path = "./data/topo.json";
-export const style = "https://bothness.github.io/ons-basemaps/data/style-esri.json";
+export const style = "https://basemaps.cartocdn.com/gl/voyager-gl-style/style.json";

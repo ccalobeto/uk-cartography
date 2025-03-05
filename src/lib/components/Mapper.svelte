@@ -20,7 +20,7 @@
 					id="geo-fill"
 					type="fill"
 					paint={{
-						'fill-color': 'white',
+						'fill-color': 'gray',
 						'fill-opacity': ['case', ['==', ['feature-state', 'hovered'], true], 0.3, 0]
 					}}
 					hover
@@ -32,7 +32,7 @@
 					id="geo-line"
 					type="line"
 					paint={{
-						'line-color': 'white',
+						'line-color': 'gray',
 						'line-width': ['case', ['==', ['feature-state', 'hovered'], true], 2.5, 0.7]
 					}}
 				/>
