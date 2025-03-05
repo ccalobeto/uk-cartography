@@ -98,7 +98,7 @@
 <nav>
 	<div>
 		<label>
-			Geography type<br />
+			Nivel Admistrativo<br />
 			<select bind:value={geoType}>
 				{#each geoTypes as type}
 					<option value={type}>{type.label}</option>
@@ -107,7 +107,7 @@
 		</label>
 
 		<label>
-			Year<br />
+			Año<br />
 			<select bind:value={year}>
 				{#each years as y}
 					<option value={y}>{y}</option>
@@ -116,7 +116,7 @@
 		</label>
 
 		<div class="countries">
-			Countries<br />
+			Países<br />
 			{#each countries as c}
 				<label>
 					<input type="checkbox" name="countries" value={c} bind:group={ctrys} />
