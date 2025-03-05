@@ -16,6 +16,9 @@
 	let bounds;
 	let lookup;
 
+	const areaCode = 'id';
+	const areaName = 'name';
+
 	let geoType = geoTypes[0];
 	let year = years[years.length - 1];
 	let ctrys = [...countries];
@@ -24,9 +27,6 @@
 		const key = geoType.key;
 		const geo = {};
 		geo[key] = filteredGeo;
-
-		console.log(`Nav: mode => ${mode}...`);
-		console.log(`Nav: geo => ${geo}`);
 
 		let output, filename;
 
@@ -40,7 +40,7 @@
 				output = csvFormat(
 					output.features
 						.map((f) => ({ ...f.properties, geometry: stringify(f.geometry) }))
-						.sort((a, b) => a.areacd.localeCompare(b.areacd))
+						.sort((a, b) => a[areaCode].localeCompare(b[areaCode]))
 				);
 				filename = `${key}${year}.csv`;
 			} else {
@@ -69,18 +69,13 @@
 	function filterGeo(geo, year, ctrys) {
 		let filtered = JSON.parse(JSON.stringify(geo));
 		let codes = ['K', ...ctrys.map((c) => c.key)];
-		filtered.features = filtered.features
-			.filter((f) => {
-				return (
-					codes.includes(f.properties.areacd[0]) &&
-					!(f.properties.end && f.properties.end < year) &&
-					!(f.properties.start && f.properties.start > year)
-				);
-			})
-			.map((f) => {
-				f.properties = f.properties = { areacd: f.properties.areacd, areanm: f.properties.areanm };
-				return f;
-			});
+		filtered.features = filtered.features.map((f) => {
+			f.properties = f.properties = {
+				areacd: f.properties[areaCode],
+				areanm: f.properties[areaName]
+			};
+			return f;
+		});
 		return filtered;
 	}
 
@@ -90,9 +85,10 @@
 		let lkp = {};
 		geoTypes.forEach((type) => {
 			geojson[type.key] = feature(topojson, topojson.objects[type.key]);
-			geojson[type.key].features.forEach((f) => (lkp[f.properties.areacd] = f.properties));
+			geojson[type.key].features.forEach((f) => (lkp[f.properties[areaCode]] = f.properties));
 		});
-		bounds = bbox(geojson['uk']);
+
+		bounds = bbox(geojson['level1']);
 		lookup = lkp;
 	}
 	onMount(init);
