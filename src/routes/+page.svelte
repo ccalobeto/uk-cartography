@@ -12,8 +12,7 @@
 
 <style>
 	main {
-		background-color: pink;
-		border: 2px solid red;
+		background-color: aliceblue;
 		max-width: 980px;
 		margin: 0 auto;
 		padding-bottom: 10px;
