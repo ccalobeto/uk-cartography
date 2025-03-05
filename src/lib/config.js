@@ -1,8 +1,8 @@
 export const geoTypes = [
-	{key: "level1", label: "Country"},
-	{key: "level2", label: "Departamento/Provincia(ECU)"},
-	{key: "level3", label: "Provincia/Cantón(ECU)"},
-	{key: "level4", label: "Distrito/Parroquia(ECU)"},
+	{key: "level1", label: "País"},
+	{key: "level2", label: "Departamento"},
+	{key: "level3", label: "Provincia"},
+	{key: "level4", label: "Distrito"},
 ];
 export const countries = [
   {key: "P", label: "Perú"},
