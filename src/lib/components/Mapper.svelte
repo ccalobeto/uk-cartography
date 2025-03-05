@@ -8,8 +8,9 @@
 	export let lookup;
 
 	let hovered;
-
 	let map = null;
+
+	const areaName = 'name';
 </script>
 
 {#if filteredGeo}
@@ -20,19 +21,21 @@
 					id="geo-fill"
 					type="fill"
 					paint={{
-						'fill-color': 'white',
+						'fill-color': 'gray',
 						'fill-opacity': ['case', ['==', ['feature-state', 'hovered'], true], 0.3, 0]
 					}}
 					hover
 					bind:hovered
 				>
-					<MapTooltip content={hovered ? `<b>${lookup[hovered].areanm}</b><br/>${hovered}` : ''} />
+					<MapTooltip
+						content={hovered ? `<b>${lookup[hovered][areaName]}</b><br/>${hovered}` : ''}
+					/>
 				</MapLayer>
 				<MapLayer
 					id="geo-line"
 					type="line"
 					paint={{
-						'line-color': 'white',
+						'line-color': 'gray',
 						'line-width': ['case', ['==', ['feature-state', 'hovered'], true], 2.5, 0.7]
 					}}
 				/>

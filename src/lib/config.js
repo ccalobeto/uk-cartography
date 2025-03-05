@@ -1,18 +1,11 @@
 export const geoTypes = [
-	{key: "ltla", label: "Local authority (lower tier)"},
-	{key: "utla", label: "Local authority (upper tier)"},
-	{key: "cty", label: "County"},
-	{key: "mcty", label: "Metropolitan county"},
-	{key: "cauth", label: "Combined authority"},
-	{key: "rgn", label: "Region"},
-	{key: "ctry", label: "Country"},
-	{key: "uk", label: "United Kingdom"}
+	{key: "level1", label: "Country"},
+	{key: "level2", label: "Departamento/Provincia(ECU)"},
+	{key: "level3", label: "Provincia/Cantón(ECU)"},
+	{key: "level4", label: "Distrito/Parroquia(ECU)"},
 ];
 export const countries = [
-  {key: "E", label: "England"},
-  {key: "N", label: "Northern Ireland"},
-  {key: "S", label: "Scotland"},
-  {key: "W", label: "Wales"}
+  {key: "P", label: "Perú"},
 ];
-export const path = "./data/topo.json";
-export const style = "https://bothness.github.io/ons-basemaps/data/style-esri.json";
+export const path = "./data/peru-100k.json";
+export const style = "https://basemaps.cartocdn.com/gl/voyager-gl-style/style.json";
