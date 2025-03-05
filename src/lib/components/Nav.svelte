@@ -38,17 +38,16 @@
 			});
 			if (mode === 'csv') {
 				output = csvFormat(
-					output.features
-						.map((f) => ({ ...f.properties, geometry: stringify(f.geometry) }))
-						.sort((a, b) => a[areaCode].localeCompare(b[areaCode]))
+					output.features.map((f) => ({ ...f.properties, geometry: stringify(f.geometry) }))
+					// .sort((a, b) => a[areaCode].localeCompare(b[areaCode]))
 				);
-				filename = `${key}${year}.csv`;
+				filename = `${key}.csv`;
 			} else {
-				filename = `${key}${year}.geojson`;
+				filename = `${key}.geojson`;
 			}
 		} else {
 			output = topology(geo, 1e5);
-			filename = `${key}${year}.json`;
+			filename = `${key}.json`;
 		}
 
 		const blob =
